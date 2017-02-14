@@ -1,8 +1,6 @@
 {
-  {
-    "item": "https://www.youtube.com/watch?v=cfOa1a8hYP8"
-  },
-  {
-    "item": "https://www.youtube.com/watch?v=hi4pzKvuEQM"
-  }
+  "playlist": [
+      "https://www.youtube.com/watch?v=cfOa1a8hYP8",
+      "https://www.youtube.com/watch?v=hi4pzKvuEQM"
+  ]
 }

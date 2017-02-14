@@ -27,11 +27,11 @@ CENTER    = 128        # Center point of generated waves
 # Create a single square wave cycle of a given frequency
 def make_square_wave(freq,framerate):
     n = int(framerate/freq/2)
-    print ('n', n)
+    # print ('n', n)
     # print ('bytearray', bytearray([CENTER-AMPLITUDE//2])*n + \
     #        bytearray([CENTER+AMPLITUDE//2])*n)
-    print ('//',[CENTER-AMPLITUDE//2]*n + \
-           [CENTER+AMPLITUDE//2]*n)
+    # print ('//',[CENTER-AMPLITUDE//2]*n + \
+    #        [CENTER+AMPLITUDE//2]*n)
 
     return bytearray([CENTER-AMPLITUDE//2])*n + \
            bytearray([CENTER+AMPLITUDE//2])*n
@@ -42,7 +42,7 @@ zero_pulse = make_square_wave(ZERO_FREQ,FRAMERATE)*4
 
 print(one_pulse)
 print(zero_pulse)
-print('printed')
+# print('printed')
 
 # Pause to insert after carriage returns (10 NULL bytes)
 null_pulse = ((zero_pulse * 9) + (one_pulse * 2))*10
