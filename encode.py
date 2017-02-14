@@ -84,17 +84,20 @@ def kcs_write_wav(filename,data,leader,trailer):
     w.writeframes(one_pulse*(int(FRAMERATE/len(one_pulse))*trailer))
     w.close()
 
-if __name__ == '__main__':
-    import sys
-    if len(sys.argv) != 3:
-        print("Usage : %s infile outfile" % sys.argv[0],file=sys.stderr)
-        raise SystemExit(1)
+def run_encode(input_name="playlist.txt", output_name="playlist.wav"):
+    # import sys
+    # if len(sys.argv) != 3:
+    #     print("Usage : %s infile outfile" % sys.argv[0],file=sys.stderr)
+    #     raise SystemExit(1)
 
-    in_filename = sys.argv[1]
-    out_filename = sys.argv[2]
+    in_filename = input_name
+    out_filename = output_name
     # data = open(in_filename,"U").read()
     data = open(in_filename,"rb").read() # use 'rb' to read the file as binary
     # data = data.replace('\n','\r\n')         # Fix line endings
     # rawdata = bytearray(data.encode('latin-1'))
     rawdata = bytearray(data) # don't encode the data as a string
     kcs_write_wav(out_filename,rawdata,5,5)
+
+if __name__ == '__main__':
+    run_encode()

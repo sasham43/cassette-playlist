@@ -72,33 +72,37 @@ def generate_bytes(bitstream,framerate):
             sample.extend(islice(bitstream,2*frames_per_bit,3*frames_per_bit-1))
             sign_changes = sum(sample)
 
-if __name__ == '__main__':
+def run_decode(input_name="playlist.wav", output_name="playlist.txt"):
     import wave
     import sys
     import optparse
 
-    p = optparse.OptionParser()
-    p.add_option("-b",action="store_true",dest="binary")
-    p.add_option("--binary",action="store_true",dest="binary")
-    p.set_defaults(binary=False)
+    # p = optparse.OptionParser()
+    # p.add_option("-b",action="store_true",dest="binary")
+    # p.add_option("--binary",action="store_true",dest="binary")
+    # p.set_defaults(binary=False)
+    #
+    # opts, args = p.parse_args()
+    # if len(args) != 1:
+    #     print("Usage: %s [-b] infile" % sys.argv[0],file=sys.stderr)
+    #     raise SystemExit(1)
 
-    opts, args = p.parse_args()
-    if len(args) != 1:
-        print("Usage: %s [-b] infile" % sys.argv[0],file=sys.stderr)
-        raise SystemExit(1)
-
-    wf = wave.open(args[0])
+    wf = wave.open(input_name)
     sign_changes = generate_wav_sign_change_bits(wf)
     byte_stream  = generate_bytes(sign_changes, wf.getframerate())
 
-    if opts.binary:
-        # Output the byte stream in 80-byte chunks with NULL stripping
-        outf = sys.stdout.buffer.raw
-        while True:
-            buffer = bytes(islice(byte_stream,80))
-            if not buffer:
-                break
-            outf.write(buffer)
+    # if opts.binary:
+
+    # Output the byte stream in 80-byte chunks with NULL stripping
+    # outf = sys.stdout.buffer.raw
+    outf = open(output_name, "wb")
+    while True:
+        buffer = bytes(islice(byte_stream,80))
+        if not buffer:
+            break
+        outf.write(buffer)
+
+
             # print (buffer)
             # command = 'ffmpeg -i pipe:0 monday_video2.3gp'
             # command = [ 'ffmpeg',
@@ -114,17 +118,21 @@ if __name__ == '__main__':
             #             'monday_video3.3gp' ]
             # p = Popen(command, stdout=PIPE, stdin=PIPE, stderr=PIPE, bufsize=10**8)
             # p.communicate(buffer)[0]
-    else:
-        buffer = bytearray()
-        while True:
-            linebreak = buffer.find(b'\n')
-            if linebreak >= 0:
-                line = buffer[:linebreak+1].replace(b'\r\n',b'\n')
-                sys.stdout.write(line.decode('latin-1'))
-                del buffer[:linebreak+1]
-            else:
-                fragment = bytes(byte for byte in islice(byte_stream,80) if byte)
-                if not fragment:
-                    sys.stdout.write(buffer.decode('latin-1'))
-                    break
-                buffer.extend(fragment)
+    # else:
+    #     buffer = bytearray()
+    #     while True:
+    #         linebreak = buffer.find(b'\n')
+    #         if linebreak >= 0:
+    #             line = buffer[:linebreak+1].replace(b'\r\n',b'\n')
+    #             sys.stdout.write(line.decode('latin-1'))
+    #             del buffer[:linebreak+1]
+    #         else:
+    #             fragment = bytes(byte for byte in islice(byte_stream,80) if byte)
+    #             if not fragment:
+    #                 sys.stdout.write(buffer.decode('latin-1'))
+    #                 break
+    #             buffer.extend(fragment)
+
+
+if __name__ == '__main__':
+    run_decode()
