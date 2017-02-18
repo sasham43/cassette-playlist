@@ -31,7 +31,7 @@ def choose():
             youtube_dl = 'youtube-dl -g \'' + video + '\''
             response = subprocess.check_output(youtube_dl, stderr=subprocess.STDOUT, shell=True)
             print ('response:', response)
-            subprocess.check_outpu('omxplayer \'' + response + '\'')
+            subprocess.check_output('omxplayer \'' + response + '\'')
             # print('omx:', omx))
             # youtube_dl = '`youtube-dl -g ' + video + '`'
             # omx = 'omxplayer' + youtube_dl
