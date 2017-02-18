@@ -23,11 +23,7 @@ def choose():
 
         # play videos
         for video in playlist['playlist']:
-            # youtube_dl = [
-            #     'youtube-dl',
-            #     '-g',
-            #     '\'' + video + '\''
-            # ]
+            print('video:', video)
             youtube_dl = 'youtube-dl -g \'' + video + '\''
             response = subprocess.check_output(youtube_dl, stderr=subprocess.STDOUT, shell=True)
             print ('response:', response)
