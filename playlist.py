@@ -32,7 +32,7 @@ def choose():
             response = subprocess.check_output(youtube_dl, stderr=subprocess.STDOUT, shell=True)
             print ('response:', response)
             response_str = response.decode('utf-8')
-            subprocess.check_output('omxplayer \'' + response_str + '\'')
+            subprocess.check_output('omxplayer \"' + response_str + '\"')
             # print('omx:', omx))
             # youtube_dl = '`youtube-dl -g ' + video + '`'
             # omx = 'omxplayer' + youtube_dl
