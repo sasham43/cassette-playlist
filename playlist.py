@@ -23,14 +23,21 @@ def choose():
 
         # play videos
         for video in playlist['playlist']:
-            print('video:', video)
-            omx = [
-                'omxplayer',
-                '`youtube-dl -g ' + video + '`'
+            youtube_dl = [
+                'youtube-dl',
+                '-g',
+                video
             ]
+            response = subprocess.check_output(youtube_dl)
+            print ('response:', response)
+            subprocess.call([
+                'omxplayer',
+                response
+            ])
+            # print('omx:', omx))
             # youtube_dl = '`youtube-dl -g ' + video + '`'
             # omx = 'omxplayer' + youtube_dl
-            subprocess.call(omx)
+            # subprocess.call(omx)
 
         # youtube_dl = '`youtube-dl -g ' + playlist[0] + '`'
 
