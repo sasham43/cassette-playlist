@@ -30,7 +30,7 @@ def choose():
             ]
             # youtube_dl = '`youtube-dl -g ' + video + '`'
             # omx = 'omxplayer' + youtube_dl
-            subprocess.call(omx.split())
+            subprocess.call(omx)
 
         # youtube_dl = '`youtube-dl -g ' + playlist[0] + '`'
 
