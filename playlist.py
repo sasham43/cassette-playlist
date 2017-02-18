@@ -13,17 +13,22 @@ def choose():
     if choice == 'e':
         print('encoding...')
         encode.run_encode(playlist_txt, playlist_wav)
-        choose() # loop
+        choose() # let's do the time warp again
     elif choice == 'd':
         print('decoding...')
         decode.run_decode(playlist_wav, playlist_txt)
         # read playlist
-        playlist_json = open(playlist_txt, "r").read())
+        playlist_json = open(playlist_txt, "r").read()
         playlist = json.loads(playlist_json)
 
         # play videos
         for video in playlist['playlist']:
             print('video:', video)
+
+        youtube_dl = '`youtube-dl -g ' + playlist[0] + '`'
+
+        omx = 'omxplayer' + youtube_dl
+        subprocess.call(omx.split())
 
         # wipe wav
         subprocess.call(['rm', playlist_wav])
