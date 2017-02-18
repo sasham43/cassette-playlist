@@ -28,7 +28,7 @@ def choose():
                 '-g',
                 video
             ]
-            response = subprocess.check_output(youtube_dl)
+            response = subprocess.check_output(youtube_dl, stderr=subprocess.STDOUT)
             print ('response:', response)
             subprocess.call([
                 'omxplayer',
