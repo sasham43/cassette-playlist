@@ -16,21 +16,21 @@ http://en.wikipedia.org/wiki/Kansas_City_standard
 from collections import deque
 from itertools import islice
 from subprocess import Popen, PIPE, STDOUT
-import pyaudio
 
-# Generate a sequence representing sign bits
-def generate_wav_sign_change_bits(wavefile):
-    samplewidth = wavefile.getsampwidth()
-    nchannels = wavefile.getnchannels()
+FORMAT    = pyaudio.paInt8
+CHANNELS  = 1
+RATE      = 9600
+CHUNKSIZE = 1024
+
+# Generate a sequence representing sign change bits on the real-time
+# audio stream (needed as input for decoding)
+def generate_sign_change_bits(stream):
     previous = 0
     while True:
-        frames = wavefile.readframes(8192)
+        frames = stream.read(CHUNKSIZE)
         if not frames:
             break
-
-        # Extract most significant bytes from left-most audio channel
-        msbytes = bytearray(frames[samplewidth-1::samplewidth*nchannels])
-
+        msbytes = bytearray(frames)
         # Emit a stream of sign-change bits
         for byte in msbytes:
             signbit = byte & 0x80
@@ -88,27 +88,19 @@ def run_decode(input_name="playlist.wav", output_name="playlist.txt"):
     #     print("Usage: %s [-b] infile" % sys.argv[0],file=sys.stderr)
     #     raise SystemExit(1)
 
-    FORMAT = pyaudio.paInt16
-    CHANNELS = 1
-    RATE = 44100
-    CHUNK = 1024
-
     # wf = wave.open(input_name)
-    audio = pyaudio.PyAudio()
-    for i in range(audio.get_device_count()):
-      dev = audio.get_device_info_by_index(i)
-      print((i,dev['name'],dev['maxInputChannels']))
+    # sign_changes = generate_wav_sign_change_bits(wf)
+    print("Reader starting")
+    p = pyaudio.PyAudio()
+    stream = p.open(format = FORMAT,
+                    channels = CHANNELS,
+                    rate = RATE,
+                    input=True,
+                    input_device_index=2,
+                    frames_per_buffer=CHUNKSIZE)
 
-    wf = audio.open(format=FORMAT,
-                channels=CHANNELS,
-                rate=RATE,
-                input=True,
-                input_device_index=2,
-                frames_per_buffer=CHUNK)
-
-    sign_changes = generate_wav_sign_change_bits(wf)
-    # byte_stream  = generate_bytes(sign_changes, wf.getframerate())
-    byte_stream  = generate_bytes(sign_changes, 44100)
+    bits = generate_sign_change_bits(stream)
+    byte_stream  = generate_bytes(bits, rate)
 
     # if opts.binary:
 
