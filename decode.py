@@ -95,8 +95,11 @@ def run_decode(input_name="playlist.wav", output_name="playlist.txt"):
 
     # wf = wave.open(input_name)
     audio = pyaudio.PyAudio()
-    wf = audio.open(format=FORMAT, channels=CHANNELS,
-                rate=RATE, input=True,
+    wf = audio.open(format=FORMAT,
+                channels=CHANNELS,
+                rate=RATE,
+                input=True,
+                input_device=1,
                 frames_per_buffer=CHUNK)
 
     sign_changes = generate_wav_sign_change_bits(wf)
