@@ -116,22 +116,6 @@ def run_decode(input_name="playlist.wav", output_name="playlist.txt"):
     #         break
     #     outf.write(buffer)
 
-
-            # print (buffer)
-            # command = 'ffmpeg -i pipe:0 monday_video2.3gp'
-            # command = [ 'ffmpeg',
-            #             '-y', # (optional) overwrite output file if it exists
-            #             '-f', 'rawvideo',
-            #             '-vcodec','rawvideo',
-            #             '-s', '128x96', # size of one frame
-            #             '-pix_fmt', 'rgb24',
-            #             '-r', '10', # frames per second
-            #             '-i', '-', # The imput comes from a pipe
-            #             # '-an', # Tells FFMPEG not to expect any audio
-            #             '-vcodec', 'mpeg4',
-            #             'monday_video3.3gp' ]
-            # p = Popen(command, stdout=PIPE, stdin=PIPE, stderr=PIPE, bufsize=10**8)
-            # p.communicate(buffer)[0]
     # else:
     buffer = bytearray()
     while True:
@@ -144,7 +128,8 @@ def run_decode(input_name="playlist.wav", output_name="playlist.txt"):
         else:
             fragment = bytes(byte for byte in islice(byte_stream,80) if byte)
             if not fragment:
-                sys.stdout.write(buffer.decode('latin-1'))
+                # sys.stdout.write(buffer.decode('latin-1'))
+                outf.write(buffer.decode('latin-1'))
                 break
             buffer.extend(fragment)
 
