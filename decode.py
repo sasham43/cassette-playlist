@@ -95,6 +95,10 @@ def run_decode(input_name="playlist.wav", output_name="playlist.txt"):
 
     # wf = wave.open(input_name)
     audio = pyaudio.PyAudio()
+    for i in range(p.get_device_count()):
+      dev = p.get_device_info_by_index(i)
+      print((i,dev['name'],dev['maxInputChannels']))
+      
     wf = audio.open(format=FORMAT,
                 channels=CHANNELS,
                 rate=RATE,
