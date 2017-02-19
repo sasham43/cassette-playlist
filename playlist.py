@@ -35,7 +35,7 @@ def choose():
             print ('video_url:', video_url)
             omx = [
                 'omxplayer',
-                '\'' + video_url + '\''
+                video_url
             ]
             subprocess.call(omx)
 
