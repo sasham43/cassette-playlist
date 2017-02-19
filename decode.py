@@ -20,7 +20,7 @@ import pyaudio
 
 FORMAT    = pyaudio.paInt8
 CHANNELS  = 1
-RATE      = 9600
+RATE      = 44100
 CHUNKSIZE = 1024
 
 
