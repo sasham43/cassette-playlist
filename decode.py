@@ -103,7 +103,7 @@ def run_decode(input_name="playlist.wav", output_name="playlist.txt"):
                     frames_per_buffer=CHUNKSIZE)
 
     bits = generate_sign_change_bits(stream)
-    byte_stream  = generate_bytes(bits, rate)
+    byte_stream  = generate_bytes(bits, RATE)
 
     # if opts.binary:
 
