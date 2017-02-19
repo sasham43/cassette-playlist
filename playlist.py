@@ -15,8 +15,9 @@ def choose():
         encode.run_encode(playlist_txt, playlist_wav)
         choose() # let's do the time warp again
     elif choice == 'd':
-        print('decoding...')
+        print('start decoding...')
         decode.run_decode(playlist_wav, playlist_txt)
+        print('decoded.  start playing...')
         # read playlist
         playlist_json = open(playlist_txt, "r").read()
         playlist = json.loads(playlist_json)
