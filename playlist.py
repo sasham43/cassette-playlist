@@ -26,13 +26,13 @@ def choose():
             print('video:', video)
             youtube_dl = 'youtube-dl -g \'' + video + '\''
             response = subprocess.check_output(youtube_dl, stderr=subprocess.STDOUT, shell=True)
-            print ('response:', response)
+            # print ('response:', response)
             response_str = response.decode('utf-8') # decode to String
             response_list = response_str.split('\n')
-            print ('response_list:', response_list)
+            # print ('response_list:', response_list)
             # response is the url twice cuz why the f not
             video_url = response_list[0].strip('\n')
-            print ('video_url:', video_url)
+            # print ('video_url:', video_url)
             omx = [
                 'omxplayer',
                 video_url
