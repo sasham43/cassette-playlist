@@ -103,7 +103,7 @@ def run_decode(input_name="playlist.wav", output_name="playlist.txt"):
                 channels=CHANNELS,
                 rate=RATE,
                 input=True,
-                input_device=1,
+                input_device=2,
                 frames_per_buffer=CHUNK)
 
     sign_changes = generate_wav_sign_change_bits(wf)
