@@ -90,7 +90,7 @@ def run_decode(input_name="playlist.wav", output_name="playlist.txt"):
 
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
-    RATE = 9600
+    RATE = 44100
     CHUNK = 1024
 
     # wf = wave.open(input_name)
