@@ -33,7 +33,11 @@ def choose():
             # response is the url twice cuz why the f not
             video_url = response_list[0].strip('\n')
             print ('video_url:', video_url)
-            subprocess.check_output('omxplayer \"' + video_url + '\"')
+            omx = [
+                'omxplayer',
+                '\'' + video_url + '\''
+            ]
+            subprocess.call(omx)
 
 
 

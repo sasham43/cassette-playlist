@@ -40,8 +40,8 @@ def make_square_wave(freq,framerate):
 one_pulse  = make_square_wave(ONES_FREQ,FRAMERATE)*8
 zero_pulse = make_square_wave(ZERO_FREQ,FRAMERATE)*4
 
-print(one_pulse)
-print(zero_pulse)
+# print(one_pulse)
+# print(zero_pulse)
 # print('printed')
 
 # Pause to insert after carriage returns (10 NULL bytes)
