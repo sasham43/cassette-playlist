@@ -16,6 +16,7 @@ http://en.wikipedia.org/wiki/Kansas_City_standard
 from collections import deque
 from itertools import islice
 from subprocess import Popen, PIPE, STDOUT
+import pyaudio
 
 # Generate a sequence representing sign bits
 def generate_wav_sign_change_bits(wavefile):
@@ -87,7 +88,17 @@ def run_decode(input_name="playlist.wav", output_name="playlist.txt"):
     #     print("Usage: %s [-b] infile" % sys.argv[0],file=sys.stderr)
     #     raise SystemExit(1)
 
-    wf = wave.open(input_name)
+    FORMAT = pyaudio.paInt16
+    CHANNELS = 1
+    RATE = 9600
+    CHUNK = 1024
+
+    # wf = wave.open(input_name)
+    audio = pyaudio.PyAudio()
+    wf = audio.open(format=FORMAT, channels=CHANNELS,
+                rate=RATE, input=True,
+                frames_per_buffer=CHUNK)
+
     sign_changes = generate_wav_sign_change_bits(wf)
     byte_stream  = generate_bytes(sign_changes, wf.getframerate())
 
