@@ -10,3 +10,5 @@ for s in standard_sample_rates:
                              input_channels=devinfo['maxInputChannels'],
                              input_format=pyaudio.paInt16):
       print ('Yay!', s)
+  else:
+      print('boo', s)
