@@ -112,6 +112,7 @@ def run_decode(input_name="playlist.wav", output_name="playlist.txt"):
     outf = open(output_name, "wb")
     while True:
         buffer = bytes(islice(byte_stream,80))
+        print('b:', buffer)
         if not buffer:
             break
         outf.write(buffer)
