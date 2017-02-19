@@ -109,7 +109,7 @@ def run_decode(input_name="playlist.wav", output_name="playlist.txt"):
 
     # Output the byte stream in 80-byte chunks with NULL stripping
     # outf = sys.stdout.buffer.raw
-    outf = open(output_name, "wb")
+    outf = open(output_name, "w")
     # while True:
     #     buffer = bytes(islice(byte_stream,80))
     #     if not buffer:
@@ -138,7 +138,8 @@ def run_decode(input_name="playlist.wav", output_name="playlist.txt"):
         linebreak = buffer.find(b'\n')
         if linebreak >= 0:
             line = buffer[:linebreak+1].replace(b'\r\n',b'\n')
-            sys.stdout.write(line.decode('latin-1'))
+            # sys.stdout.write(line.decode('latin-1'))
+            outf.write(line.decode('latin-1'))
             del buffer[:linebreak+1]
         else:
             fragment = bytes(byte for byte in islice(byte_stream,80) if byte)
