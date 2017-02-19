@@ -30,6 +30,7 @@ def choose():
             response_list = response.split('\n')
             # response is the url twice cuz why the f not
             response_str = response_list[0].decode('utf-8').rstrip('\n')
+            print ('response_str:', response_str)
             subprocess.check_output('omxplayer \"' + response_str + '\"')
 
 
