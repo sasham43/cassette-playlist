@@ -123,13 +123,15 @@ def run_decode(input_name="playlist.wav", output_name="playlist.txt"):
         if linebreak >= 0:
             line = buffer[:linebreak+1].replace(b'\r\n',b'\n')
             # sys.stdout.write(line.decode('latin-1'))
-            outf.write(line.decode('latin-1'))
+            outf.write(line.decode('utf-8'))
+            print ('line:', line.decode('utf-8'))
             del buffer[:linebreak+1]
         else:
             fragment = bytes(byte for byte in islice(byte_stream,80) if byte)
             if not fragment:
                 # sys.stdout.write(buffer.decode('latin-1'))
-                outf.write(buffer.decode('latin-1'))
+                outf.write(buffer.decode('utf-8'))
+                print('buf:', buffer.decode('utf-8'))
                 break
             buffer.extend(fragment)
 
