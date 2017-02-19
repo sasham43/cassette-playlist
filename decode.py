@@ -16,6 +16,7 @@ http://en.wikipedia.org/wiki/Kansas_City_standard
 from collections import deque
 from itertools import islice
 from subprocess import Popen, PIPE, STDOUT
+import pyaudio
 
 FORMAT    = pyaudio.paInt8
 CHANNELS  = 1
