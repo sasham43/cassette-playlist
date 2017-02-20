@@ -18,7 +18,8 @@ import subprocess
 
 # A few global parameters related to the encoding
 
-FRAMERATE = 9600       # Hz
+# FRAMERATE = 9600       # Hz
+FRAMERATE = 44100       # Hz
 ONES_FREQ = 2400       # Hz (per KCS)
 ZERO_FREQ = 1200       # Hz (per KCS)
 AMPLITUDE = 128        # Amplitude of generated square waves
